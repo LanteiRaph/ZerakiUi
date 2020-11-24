@@ -1,4 +1,4 @@
-# funiturestore
+# schooldashboard
 
 ## Build Setup
 

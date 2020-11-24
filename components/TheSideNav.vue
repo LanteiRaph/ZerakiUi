@@ -1,115 +1,50 @@
 <template>
-<span>
-    <div id="sidenav">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Meets Us</a></li>
-                <li><a href="/login">Log In</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div id="menubtn">
-        <img src="~/assets/menu.png" id="menu"/>
-        <img src="~/assets/close.png" id="close" />
-    </div>
-</span>
+  <a-layout-sider
+    v-model="collapsed"
+    collapsible
+    theme="light"
+    class="sidenav"
+  >
+    <div class="logo" />
+    <a-menu :default-selected-keys="['2']" mode="inline">
+      <a-menu-item key="1">
+        <a-icon type="desktop" />
+        <span>Home</span>
+      </a-menu-item>
+      <a-menu-item key="2">
+        <a-icon type="snippets" />
+        <span>Student Assesment</span>
+      </a-menu-item>
+      <a-sub-menu key="sub1">
+        <span slot="title"
+          ><a-icon type="user" /><span>User | Parent </span></span
+        >
+        <a-menu-item key="3"> Tomothy Kimani </a-menu-item>
+      </a-sub-menu>
+      <a-sub-menu key="sub2">
+        <span slot="title"><a-icon type="team" /><span>Students</span></span>
+        <a-menu-item key="6"> {{ studentName }} </a-menu-item>
+      </a-sub-menu>
+    </a-menu>
+  </a-layout-sider>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
 export default {
-    name:'SideNav',
-    components:{},
-    props:[],
-    data(){
-        return{}
-    },
-    mounted(){
-        alert("hello world")
-        //Get the id button for the menu icon
-        const menuBtn = this.$el.querySelector('#menubtn');
-        //Get the side nav holder
-        const sideNav = this.$el.querySelector('#sidenav')
-        //Gte the menu image
-        const menu = this.$el.querySelector("#menu")
-        //Get the close btn 
-        const close = this.$el.querySelector('#close')
-        menuBtn.style.reght = "-250px"
-        //Get the 
-        //Add event listner 
-        menuBtn.addEventListener('click', () => {
-            //Compire the side nav right property value to -250px
-            if(sideNav.style.right == '-250px'){
-                //Set it to 0 it will appear on the screen
-                sideNav.style.right = '0'
-                //Hide the manu icon
-                menu.style.display = 'none'
-                //Show the close icon
-                close.style.display = 'block'
-            }
-            //else: Set it to -250: dispaear
-            else{
-                //set value 
-                sideNav.style.right = '-250px'
-                //Hide the manu icon
-                menu.style.display = 'block'
-                //Show the close icon
-                close.style.display = 'none'
-            }
-        })
-    },
-    computed:{
-        ...mapGetters(['ifAuthenticated'])
-    }
-
-}
+  name: "SideNav",
+  props: ["studentName"],
+  data() {
+    return { collapsed: true,};
+  },
+};
 </script>
 
 <style >
-#sidenav{
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    right: -250px;
-    top: 0;
-    background: #BFB8AD;
-    z-index: 2;
-    transition: 0.5s;
-}
-nav ul li{
-    list-style: none;
-    margin: 30px 20px;
-}
-nav ul li a{
-    text-decoration: none;
-    color: white;
-}
-#menubtn{
-    width: 50px;
-    height: 50px;
-    background-color: #BFB8AD;
-    text-align: center;
-    position: fixed;
-    right: 30px;
-    top: 20px;
-    border-radius: 3px;
-    z-index: 3;
-    cursor: pointer;
-}
-#menubtn img{
-    width: 30px;
-    margin-top:10px;
-    columns: white;
-}
-
-#close{
+@media screen and (max-width: 770px) {
+  .sidenav{
     display: none;
-    width: 20px;
+  }
+  
 }
-
-
 </style>
+
